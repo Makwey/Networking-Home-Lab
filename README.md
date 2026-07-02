@@ -25,7 +25,7 @@ This project demonstrates a basic LAN topology created using Cisco Packet Tracer
 |---------|---------:|
 | Router | 1 |
 | Switch | 1 |
-| PCs | 3 |
+| PCs | 5 |
 
 ## IP Addressing
 
