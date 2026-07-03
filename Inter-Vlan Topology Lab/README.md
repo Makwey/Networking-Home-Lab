@@ -11,6 +11,15 @@ This project demonstrates inter-VLAN routing using a Cisco router configured wit
 - 6 Access Switches
 - 12 PCs
 
+## Devices Used
+
+| Device | Quantity |
+|---------|---------:|
+| Router | 1 |
+| CoreSwitch | 1 |
+| Access Switch | 6 |
+| PCs | 12 |
+
 ## VLANs
 
 | VLAN | Department | Network |
