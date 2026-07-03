@@ -47,22 +47,14 @@ Each PC will automatically receive:
 ## Verification Commands
 
 Check DHCP leases:
-
-plaintext
 show ip dhcp binding
 
-
 View DHCP pool information:
-
-```plaintext
 show ip dhcp pool
-```
 
 Display the router configuration:
-
-```plaintext
+plaintext
 show running-config
-```
 
 ---
 
