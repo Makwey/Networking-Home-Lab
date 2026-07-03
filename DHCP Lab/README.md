@@ -33,9 +33,9 @@ Each PC will automatically receive:
 
 ## Verification Commands
 
-- `show ip dhcp binding` – Check DHCP leases.
-- `show ip dhcp pool` – View DHCP pool information.
-- `show running-config` – Display the router configuration.
+- `show ip dhcp binding` – check DHCP leases.
+- `show ip dhcp pool` – view DHCP pool information.
+- `show running-config` – display the router configuration.
 
 ---
 
