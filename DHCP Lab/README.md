@@ -40,7 +40,6 @@ View DHCP pool information:
 show ip dhcp pool
 
 Display the router configuration:
-plaintext
 show running-config
 
 ---
