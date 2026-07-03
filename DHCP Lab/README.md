@@ -56,9 +56,9 @@ interface g0/2
 ## Excluded Addresses
 
 ```plaintext
-ip dhcp excluded-address 192.168.10.1
-ip dhcp excluded-address 192.168.20.1
-ip dhcp excluded-address 192.168.30.1
+ip dhcp excluded-address 192.168.10.1 192.168.10.10
+ip dhcp excluded-address 192.168.20.1 192.168.20.10
+ip dhcp excluded-address 192.168.30.1 192.168.30.10
 ```
 
 ---
