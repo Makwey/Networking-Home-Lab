@@ -84,3 +84,5 @@ This project demonstrates inter-VLAN routing using a Cisco router configured wit
 - Trunk links verified using `show interfaces trunk`
 - VLAN assignments verified using `show vlan brief`
 - Router subinterfaces verified using `show ip interface brief`
+
+------
