@@ -6,19 +6,6 @@ This project demonstrates the configuration of a DHCP server on a Cisco router u
 
 ---
 
-## Network Topology
-
-text
-                 Router (R1)
-      G0/0      G0/1      G0/2
-        |          |          |
-      Switch1    Switch2    Switch3
-        |          |          |
-      PC1-PC3    PC4-PC6    PC7-PC9
-
-
----
-
 ## Network Addressing
 
 | Network | Interface | Network Address | Default Gateway | Subnet Mask |
