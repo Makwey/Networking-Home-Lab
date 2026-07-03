@@ -5,6 +5,13 @@
 This project demonstrates the configuration of a DHCP server on a Cisco router using three separate DHCP pools. Each pool serves a different network, allowing client devices to automatically obtain their IP addresses, subnet masks, and default gateways.
 
 ---
+## Devices Used
+
+| Device | Quantity |
+|---------|---------:|
+| Router | 1 |
+| Switch | 3 |
+| PCs | 9 |
 
 ## Network Addressing
 
