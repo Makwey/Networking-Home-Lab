@@ -6,14 +6,6 @@ This project demonstrates a basic LAN topology created using Cisco Packet Tracer
 
 ---
 
-## Objectives
-
-- Build a basic network topology
-- Configure IP addressing
-- Configure router interfaces
-- Verify device connectivity using ping
-- Understand packet flow within a LAN
-
 ## Devices Used
 
 | Device | Quantity |
