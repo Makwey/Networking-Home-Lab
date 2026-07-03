@@ -4,13 +4,6 @@
 
 This project demonstrates inter-VLAN routing using a Cisco router configured with Router-on-a-Stick.
 
-## Network Devices
-
-- 1 Cisco Router
-- 1 Core Switch
-- 6 Access Switches
-- 12 PCs
-
 ## Devices Used
 
 | Device | Quantity |
