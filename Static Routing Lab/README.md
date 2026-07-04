@@ -29,7 +29,7 @@ This project demonstrates **Static Routing** using Cisco Packet Tracer. Three ro
 
 ### PC Configuration
 
-### LAN 1
+ LAN 1
 
 | PC | IP Address | Subnet Mask | Default Gateway |
 |----|------------|-------------|-----------------|
