@@ -16,6 +16,17 @@ This project demonstrates **Static Routing** using Cisco Packet Tracer. Three ro
 
 ---
 
+### Router-to-Router Links
+
+| Link | Network | Router Interface | IP Address |
+|------|---------|------------------|------------|
+| R1 ↔ R2 | 10.0.12.0/30 | R1 G0/1 | 10.0.12.1 |
+| | | R2 G0/1 | 10.0.12.2 |
+| R2 ↔ R3 | 10.0.23.0/30 | R2 G0/2 | 10.0.23.1 |
+| | | R3 G0/1 | 10.0.23.2 |
+
+------
+
 # PC Configuration
 
 ## LAN 1
