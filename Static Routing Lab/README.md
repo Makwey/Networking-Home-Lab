@@ -27,7 +27,7 @@ This project demonstrates **Static Routing** using Cisco Packet Tracer. Three ro
 
 ------
 
-# PC Configuration
+### PC Configuration
 
 ## LAN 1
 
