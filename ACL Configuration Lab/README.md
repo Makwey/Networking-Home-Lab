@@ -8,10 +8,6 @@ The objective is to control communication between VLANs/subnets while allowing a
 
 ---
 
-## 🖥️ Network Topology
-
-![ACL Topology](topology.png)
-
 ### Network Layout
 
 | Department | Network |
