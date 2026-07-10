@@ -20,27 +20,6 @@ The objective is to control communication between VLANs/subnets while allowing a
 
 ---
 
-## 🎯 Objectives
-
-- Configure Extended ACLs on Cisco routers.
-- Restrict communication between departments.
-- Protect critical servers.
-- Allow only authorized traffic.
-- Demonstrate best practices for ACL placement.
-
----
-
-## 🛠 Devices Used
-
-- Cisco Routers (2)
-- Cisco Switches
-- PCs
-- DHCP Server
-- Web Server
-- Cisco Packet Tracer
-
----
-
 ## 🌐 IP Addressing
 
 | Network | Purpose |
