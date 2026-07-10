@@ -38,23 +38,10 @@ Display configured ACLs
 show access-lists
 ```
 
-View interface ACL assignments
-
-```cisco
-show ip interface
-```
-
-View routing table
-
-```cisco
-show ip route
-```
-
 Test connectivity
 
 ```text
 ping
-tracert
 web browser (HTTP/HTTPS)
 ```
 
