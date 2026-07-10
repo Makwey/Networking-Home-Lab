@@ -1,6 +1,6 @@
 # Cisco Extended ACL Network Topology
 
-## 📖 Overview
+## Overview
 
 This project demonstrates the implementation of **Extended Access Control Lists (ACLs)** in a Cisco Packet Tracer network. The topology simulates a small enterprise environment consisting of multiple departments with different security requirements.
 
