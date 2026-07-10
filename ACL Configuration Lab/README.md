@@ -25,7 +25,7 @@ The objective is to control communication between VLANs/subnets while allowing a
 | Source | HR | IT | DHCP | Web |
 |---------|----|----|------|-----|
 | Guest | ❌ | ❌ | ❌ | ✅ |
-| HR | — | ❌ | ❌ | ✅ |
+| HR | ✅ | ❌ | ❌ | ✅ |
 | IT | ✅ | ✅ | ✅ | ✅ |
 
 ---
