@@ -115,37 +115,8 @@ The following commands were used to verify the NAT configuration:
 ```
 show ip nat translations
 
-show ip nat statistics
-
 show running-config
 
-ping 200.1.1.100
-
-ping 172.16.1.x
-```
-
----
-
-## Sample NAT Configuration
-
-```cisco
-interface GigabitEthernet0/0
- ip address 192.168.1.1 255.255.255.0
- ip nat inside
-
-interface GigabitEthernet0/1
- ip address 192.168.2.1 255.255.255.0
- ip nat inside
-
-interface Serial0/3/0
- ip address 200.1.1.1 255.255.255.0
- ip nat outside
-
-ip nat inside source static 192.168.1.x 200.1.1.100
-
-access-list 2 permit 192.168.2.0 0.0.0.255
-
-ip nat inside source list 2 interface Serial0/3/0 overload
 ```
 
 ---
@@ -159,37 +130,3 @@ ip nat inside source list 2 interface Serial0/3/0 overload
 - Demonstrated one-to-one and many-to-one NAT translation.
 
 ---
-
-## 📷 Topology
-
-Include a screenshot of your Packet Tracer topology here.
-
-Example:
-
-```
-images/topology.png
-```
-
----
-
-## 📚 Learning Outcomes
-
-Through this project I gained hands-on experience with:
-
-- Static NAT configuration
-- Dynamic NAT configuration
-- Port Address Translation (PAT)
-- Cisco IOS CLI
-- NAT verification and troubleshooting
-- IPv4 routing
-- Enterprise network design fundamentals
-
----
-
-## 👨‍💻 Author
-
-**Your Name**
-
-GitHub: https://github.com/yourusername
-
-LinkedIn: https://linkedin.com/in/yourprofile
