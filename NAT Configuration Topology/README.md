@@ -116,7 +116,7 @@ show running-config
 
 ---
 
-## ✅ Results
+##  Results
 
 - Successfully configured Static NAT using PAT.
 - Successfully configured Dynamic NAT.
