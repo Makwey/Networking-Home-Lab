@@ -98,8 +98,8 @@ The public IP address
 
 was used to successfully reach the remote server from both internal networks:
 
-- 192.168.1.0/24 (Static NAT)
-- 192.168.2.0/24 (PAT Overload)
+- 192.168.1.0/24 
+- 192.168.2.0/24 
 
 This demonstrates that:
 
