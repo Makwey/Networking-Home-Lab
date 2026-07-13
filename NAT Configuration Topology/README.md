@@ -19,7 +19,7 @@ The topology consists of two private LANs connected through a router to a remote
 
 ---
 
-## 📡 Addressing Scheme
+##  Addressing Scheme
 
 ### Router 1
 
