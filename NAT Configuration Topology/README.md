@@ -1,270 +1,195 @@
-# Cisco Packet Tracer - Static NAT and Dynamic NAT Configuration
+# Cisco Packet Tracer - Static NAT and Dynamic NAT (PAT) Configuration
 
-## Overview
+##  Overview
 
-This project demonstrates the implementation of both **Static NAT** and **Dynamic NAT (PAT/Overload)** using Cisco Packet Tracer.
+This project demonstrates the implementation of both **Static Network Address Translation (Static NAT)** and **Dynamic Network Address Translation (Dynamic NAT with PAT/Overload)** using Cisco Packet Tracer.
 
-The topology consists of two private LANs connected to a router that performs Network Address Translation (NAT). A second router connects the internal network to a remote server hosted on a different network.
-
-The objective of this lab is to allow hosts from two private networks to communicate with a server using a public IP address while showcasing the differences between Static NAT and Dynamic NAT.
+The topology consists of two private LANs connected through a router to a remote network hosting a server. The project shows how different NAT techniques allow internal private hosts to communicate with external networks using public IP addresses.
 
 ---
 
-### Network Addressing
+### Networks
 
 | Network | Purpose |
 |----------|---------|
-| **192.168.1.0/24** | Static NAT LAN |
-| **192.168.2.0/24** | Dynamic NAT (PAT) LAN |
-| **200.1.1.0/24** | Public WAN Network |
-| **172.16.1.0/24** | Server Network |
+| 192.168.1.0/24 | Static NAT LAN |
+| 192.168.2.0/24 | Dynamic NAT (PAT) LAN |
+| 200.1.1.0/24 | Public WAN Network |
+| 172.16.1.0/24 | Remote Server Network |
 
 ---
 
-## Topology Description
+## 📡 Addressing Scheme
 
 ### Router 1
 
-Router1 performs both NAT functions.
-
-- **GigabitEthernet0/0**
-  - IP: `192.168.1.1/24`
-  - NAT Inside
-  - Connected to Static NAT LAN
-
-- **GigabitEthernet0/1**
-  - IP: `192.168.2.1/24`
-  - NAT Inside
-  - Connected to Dynamic NAT LAN
-
-- **Serial0/3/0**
-  - IP: `200.1.1.1/24`
-  - NAT Outside
-  - Connected to Router2
-
----
+| Interface | IP Address | Description |
+|------------|------------|-------------|
+| G0/0 | 192.168.1.1/24 | Static NAT LAN |
+| G0/1 | 192.168.2.1/24 | Dynamic NAT LAN |
+| S0/3/0 | 200.1.1.1/24 | WAN (Outside Interface) |
 
 ### Router 2
 
-- Serial Link
-  - `200.1.1.2/24`
+| Interface | IP Address |
+|------------|------------|
+| S0/3/0 | 200.1.1.2/24 |
+| G0/0 | 172.16.1.1/24 |
 
-- LAN Interface
-  - `172.16.1.1/24`
+### Server
 
-Connected to the server network.
-
----
-
-### End Devices
-
-#### Static NAT Network
-
-- PC1
-- PC2
-
-Network:
-
-```
-192.168.1.0/24
-```
-
-#### Dynamic NAT Network
-
-- PC3
-- PC4
-
-Network:
-
-```
-192.168.2.0/24
-```
-
-#### Server
-
-```
-172.16.1.100/24
-```
+| Device | IP Address |
+|---------|------------|
+| Server1 | 172.16.1.x |
 
 ---
 
 # NAT Configuration
 
-## Static NAT
+## PAT (NAT Overload)
 
-The **192.168.1.0/24** network uses **Static NAT**.
+The **192.168.1.0/24** network is configured to use **Port Address Translation (PAT)**.
 
-A private IP address is permanently mapped to a public IP address.
+PAT allows multiple internal devices to share a single public IP address by translating both the source IP address and the source port number.
+
+Router1 uses the public IP address assigned to its Serial0/3/0 interface for outbound traffic.
+
+Configuration:
+
+```cisco
+access-list 1 permit 192.168.1.0 0.0.0.255
+
+ip nat inside source list 1 interface Serial0/3/0 overload
+```
+
+---
+
+## Dynamic NAT
+
+The **192.168.2.0/24** network uses **Dynamic NAT**.
+
+A pool of public IP addresses is configured, and each internal host is assigned an available address from the pool while communicating with external networks.
+
+Public NAT Pool:
+
+- 200.1.1.50
+- 200.1.1.51
+- ...
+- 200.1.1.60
+
+Configuration:
+
+```cisco
+ip nat pool DYNAMIC 200.1.1.50 200.1.1.60 netmask 255.255.255.0
+
+access-list 2 permit 192.168.2.0 0.0.0.255
+
+ip nat inside source list 2 pool DYNAMIC
+```
+---
+
+## Public IP Usage
+
+The public IP address
+
+```
+200.1.1.100
+```
+
+was used to successfully reach the remote server from both internal networks:
+
+- 192.168.1.0/24 (Static NAT)
+- 192.168.2.0/24 (PAT Overload)
+
+This demonstrates that:
+
+- Static NAT provides a fixed one-to-one mapping.
+- PAT allows multiple clients to share the same public IP.
+
+---
+
+## Verification
+
+The following commands were used to verify the NAT configuration:
+
+```
+show ip nat translations
+
+show ip nat statistics
+
+show running-config
+
+ping 200.1.1.100
+
+ping 172.16.1.x
+```
+
+---
+
+## Sample NAT Configuration
+
+```cisco
+interface GigabitEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ ip nat inside
+
+interface GigabitEthernet0/1
+ ip address 192.168.2.1 255.255.255.0
+ ip nat inside
+
+interface Serial0/3/0
+ ip address 200.1.1.1 255.255.255.0
+ ip nat outside
+
+ip nat inside source static 192.168.1.x 200.1.1.100
+
+access-list 2 permit 192.168.2.0 0.0.0.255
+
+ip nat inside source list 2 interface Serial0/3/0 overload
+```
+
+---
+
+## ✅ Results
+
+- Successfully configured Static NAT using PAT.
+- Successfully configured Dynamic NAT.
+- Verified connectivity between internal hosts and the remote server.
+- Confirmed NAT translations using Cisco IOS verification commands.
+- Demonstrated one-to-one and many-to-one NAT translation.
+
+---
+
+## 📷 Topology
+
+Include a screenshot of your Packet Tracer topology here.
 
 Example:
 
 ```
-Inside Local:
-192.168.1.x
-
-↓
-
-Inside Global:
-200.1.1.100
-```
-
-This allows hosts on the Static NAT network to be reachable through the same public IP address.
-
----
-
-## Dynamic NAT (PAT)
-
-The **192.168.2.0/24** network uses **Dynamic NAT with Overload (PAT)**.
-
-Router1 translates multiple private addresses to public addresses using:
-
-```
-ip nat inside source list 1 interface Serial0/3/0 overload
-```
-
-The overload feature allows multiple hosts to share a single public interface IP by using different TCP/UDP port numbers.
-
----
-
-## NAT Configuration Used
-
-### NAT Inside Interfaces
-
-```
-interface GigabitEthernet0/0
- ip nat inside
-
-interface GigabitEthernet0/1
- ip nat inside
-```
-
-### NAT Outside Interface
-
-```
-interface Serial0/3/0
- ip nat outside
-```
-
-### Dynamic NAT Pool
-
-```
-ip nat pool DYNAMIC 200.1.1.50 200.1.1.60 netmask 255.255.255.0
-```
-
-### PAT Configuration
-
-```
-ip nat inside source list 1 interface Serial0/3/0 overload
-```
-
-### Static NAT
-
-```
-ip nat inside source static 192.168.1.x 200.1.1.100
-```
-
-### Access Lists
-
-```
-access-list 1 permit 192.168.2.0 0.0.0.255
-access-list 2 permit 192.168.1.0 0.0.0.255
+images/topology.png
 ```
 
 ---
 
-# Connectivity Test
+## 📚 Learning Outcomes
 
-The following connectivity tests were successfully performed.
+Through this project I gained hands-on experience with:
 
-### Static NAT
-
-- PC (192.168.1.0/24)
-- Pinged the server using:
-
-```
-200.1.1.100
-```
-
-Result:
-
-✅ Successful
-
----
-
-### Dynamic NAT (PAT)
-
-- PC (192.168.2.0/24)
-
-Successfully accessed the remote network through PAT translation.
-
-Result:
-
-✅ Successful
-
----
-
-# Verification Commands
-
-Useful Cisco IOS commands used to verify NAT:
-
-```
-show ip nat translations
-```
-
-```
-show ip nat statistics
-```
-
-```
-show running-config
-```
-
-```
-show access-lists
-```
-
----
-
-# Project Objectives
-
-- Configure Static NAT
-- Configure Dynamic NAT
-- Configure PAT (NAT Overload)
-- Understand Inside Local and Inside Global addresses
-- Verify NAT translations
-- Test end-to-end connectivity
-- Implement basic enterprise-style network routing
-
----
-
-# Skills Demonstrated
-
+- Static NAT configuration
+- Dynamic NAT configuration
+- Port Address Translation (PAT)
 - Cisco IOS CLI
-- Static NAT
-- Dynamic NAT
-- PAT (Port Address Translation)
-- IPv4 Addressing
-- Access Control Lists (ACL)
-- Router Configuration
-- Network Troubleshooting
-- Cisco Packet Tracer
+- NAT verification and troubleshooting
+- IPv4 routing
+- Enterprise network design fundamentals
 
 ---
 
-# Files Included
+## 👨‍💻 Author
 
-```
-📁 Static-Dynamic-NAT-Lab
-│
-├── README.md
-├── topology.png
-├── router1-config.txt
-├── router2-config.txt
-└── Static_Dynamic_NAT.pkt
-```
+**Your Name**
 
----
+GitHub: https://github.com/yourusername
 
-## Conclusion
-
-This project demonstrates the successful implementation of both **Static NAT** and **Dynamic NAT (PAT)** in Cisco Packet Tracer. Two separate private networks (`192.168.1.0/24` and `192.168.2.0/24`) were translated to public addresses, enabling communication with a remote server across a WAN connection. The lab highlights how Static NAT provides a fixed public mapping, while PAT allows multiple internal hosts to share a single public IP efficiently, illustrating common NAT deployments used in enterprise networks.
+LinkedIn: https://linkedin.com/in/yourprofile
